@@ -54,6 +54,85 @@ namespace Infraestructura.Productos
 
     
     
+     public bool Borrar(InfoProducto e)
+        {
+            bool partida = false;
+            int posicion = ObtenerPosicion(e);
+            if (posicion < 0)
+            {
+                throw new ArgumentException($"Error, El codigo {e.Id} no estaasignado a ningun producto.");
+            }
+            InfoProducto[] tmp = new InfoProducto[productos.Length - 1];
+            productos[posicion] = productos[productos.Length - 1];
+            Array.Copy(productos, tmp, productos.Length - 1);
+            productos = tmp;
+
+            return !partida;
+        }
+    
+    
+    public InfoProducto[] ObtenerunProducto()
+        {
+            return productos;
+        }
+        
+         public InfoProducto BuscaId(int id)
+        {
+            int posicion = -1;
+            for (int i = 0; i < productos.Length; i++)
+            {
+                if (productos[i].Id == id)
+                {
+                    posicion = i;
+                    break;
+                }
+            }
+
+            return posicion < 0 ? null : productos[posicion];
+
+
+
+            
+
+
+        }
+        
+         public int ObtenerPosicion(InfoProducto p)
+        {
+
+
+
+                if (p == null)
+                {
+
+                    throw new ArgumentException("todavia no ha ingresado un producto que actualizar");
+
+
+                }
+                else
+                {
+
+                    int posicion = -1, i = 0;
+                    foreach (InfoProducto prod in productos)
+                    {
+                        if (prod.Id == p.Id)
+                        {
+                            posicion = i;
+                            break;
+                        }
+                        i++;
+                    }
+
+                    return posicion;
+
+
+
+                }
+
+
+
+
+        }
     
     
     
