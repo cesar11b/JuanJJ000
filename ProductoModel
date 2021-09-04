@@ -1,0 +1,71 @@
+using DatoProducto;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Infraestructura.Productos
+{
+         public class ProductoModel
+    {   
+    
+    
+    
+            private InfoProducto[] productos;
+            
+            
+             public void Agregar(InfoProducto e)
+        {
+            if( e == null )
+            {
+
+                throw new ArgumentException("Error, el producto no puede estar vacio (Null).");
+
+            }
+
+            if( productos == null )
+            {
+                productos = new InfoProducto[1];
+                productos[productos.Length - 1] = e;
+                return;
+            }
+
+            InfoProducto[] tmp = new InfoProducto[productos.Length + 1];
+            Array.Copy(productos, tmp, productos.Length);
+            tmp[tmp.Length - 1] = e;
+            productos = tmp;
+        }
+        
+        
+        
+         public bool Actualizar(InfoProducto e)
+        {
+            bool excecute66order = false;
+            int posicion = ObtenerPosicion(e);
+            if (posicion < 0)
+            {
+                throw new ArgumentException($"Error, El codigo {e.Id} no esta asignado a ningun producto.");
+            }
+
+            productos[posicion] = e;
+            return !excecute66order;
+        }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     }   
+
+
+
+}
